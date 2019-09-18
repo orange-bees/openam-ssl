@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  openam:
+    image: orangebees/openam-ssl:14.4.1
+    hostname: openam
+    environment:
+    # Enable additional JVM information and garbage collection information. Enable only one line below.  
+    #  - JAVA_OPTS=-Xmx2048m -Xms512m -XX:ReservedCodeCacheSize=64m -XX:+UseG1GC -XX:+CMSClassUnloadingEnabled -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
+      - JAVA_OPTS=-Xmx4096m -Xms1024m -XX:ReservedCodeCacheSize=64m -XX:+UseG1GC -XX:+CMSClassUnloadingEnabled
+    ports:
+      - "8080:8080/tcp"
+      - "8443:8443/tcp"
+    networks:
+      - openam-net
+
+networks:
+  openam-net:
+    driver: overlay
